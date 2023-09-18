@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>TransformedShapes</title>
+    <style>
+      /* This style section is here to make the canvas more obvious on the
+       page.  It is white on a light gray page background, with a thin
+       black border. */
+      body {
+        background-color: #e8e8e8;
+      }
+      canvas {
+        background-color: white;
+        display: block;
+      }
+      #canvasholder {
+        border: 2px solid black;
+        float: left; /* This makes the border exactly fit the canvas. */
+      }
+    </style>
+    <script>
+      let g; // A 2D graphics context for drawing on the canvas.
+
+      //***************** Functions for drawing the three basic shapes *****************
+
+      /**
+       * Draws a filled circle of radius 50 (diameter 100) centered at (0,0),
+       * subject to whatever transform(s) have been applied to g.
+       */
+      function circle() {
+        g.beginPath();
+        g.arc(0, 0, 50, 0, 2 * Math.PI, false);
+        g.fill();
+      }
+
+      /**
+       * Draws a filled square with side 100 centered at (0,0), subject
+       * to whatever transform(s) have been applied to g.
+       */
+      function square() {
+        g.fillRect(-50, -50, 100, 100);
+      }
+
+      /**
+       * Draws a filled triangle with vertices at (-50,50), (50,50), and
+       * (0,-50), subject to whatever transform(s) have been applied to g.
+       */
+      function triangle() {
+        g.beginPath();
+        g.moveTo(-50, 50);
+        g.lineTo(50, 50);
+        g.lineTo(0, -50);
+        g.closePath();
+        g.fill();
+      }
+
+      function draw() {
+        g.fillStyle = "white";
+        g.fillRect(0, 0, 600, 600);
+        g.fillStyle = "black";
+
+        g.save();
+        g.translate(300, 125);
+        g.scale(1, 0.5);
+        triangle();
+        g.restore();
+
+        g.save();
+        g.translate(200, 240);
+        g.scale(1.1, 1.2);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(400, 240);
+        g.scale(1.1, 1.2);
+        square();
+        g.restore();
+
+        //white small square
+        g.fillStyle = "white";
+
+        g.save();
+        g.translate(365, 210);
+        g.scale(0.3, 0.3);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(365, 260);
+        g.scale(0.3, 0.3);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(420, 210);
+        g.scale(0.35, 0.3);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(420, 260);
+        g.scale(0.35, 0.3);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(235, 210);
+        g.scale(0.3, 0.3);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(235, 260);
+        g.scale(0.3, 0.3);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(180, 210);
+        g.scale(0.35, 0.3);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(180, 260);
+        g.scale(0.35, 0.3);
+        square();
+        g.restore();
+        //end white small square
+
+        g.fillStyle = "black";
+
+        g.save();
+        g.translate(300, 225);
+        g.scale(1, 1.5);
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(300, 235);
+        g.scale(0.23, 0.45);
+        g.fillStyle = "white";
+        square();
+        g.restore();
+
+        g.save();
+        g.translate(300, 210);
+        g.scale(0.23, 0.23);
+        g.fillStyle = "white";
+        circle();
+        g.restore();
+
+        g.save();
+        g.translate(300, 150);
+        g.scale(0.3, 0.3);
+        g.fillStyle = "white";
+        circle();
+        g.restore();
+
+        g.save();
+        g.translate(canvas.width / 2, (canvas.height / 2 + 12));
+        g.scale(5, 1);
+        g.fillStyle = "red";
+        square();
+        g.restore();
+
+        g.font = "40px Arial";
+        g.fillStyle = "white";
+        g.textAlign = "center";
+        g.fillText("Grafika Kelas A 2023", canvas.width / 2, (canvas.height / 2 + 20));
+      }
+
+      function init() {
+        try {
+          let canvas = document.getElementById("canvas");
+          g = canvas.getContext("2d");
+        } catch (e) {
+          document.getElementById("canvasholder").innerHTML =
+            "<p>Canvas graphics is not supported.<br>" +
+            "An error occurred while initializing graphics.</p>";
+          return;
+        }
+        draw();
+      }
+
+      window.onload = init; 
+    </script>
+  </head>
+  <body>
+    <h1>Assignment 2: Transformed Shapes</h1>
+
+    <noscript>
+      <!-- This message will be shown in the page if JavaScript is not available. -->
+      <p>JavaScript is required to use this page.</p>
+    </noscript>
+
+    <div id="canvasholder">
+      <canvas id="canvas" width="600" height="600">
+        <!-- This message is shown on the page if the browser doesn't support the canvas element. -->
+        Canvas not supported.
+      </canvas>
+    </div>
+  </body>
+</html>
